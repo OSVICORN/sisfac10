@@ -1,13 +1,13 @@
 {% extends 'base/base.html' %}
 
 {% block page_content %}
-<form method="post" id="frmFacturas">
+<form method="post" id="frmPedidos">
     {% csrf_token %}
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <a href="#" class="btn btn-danger">Guardar</a>
-        <a href="{% url 'fac:factura_one' enc.id %}" class="btn btn-success" target="_factura">Imprimir</a>
-        <a href="{% url 'fac:factura_list' %}" class="btn btn-info">Cancelar</a>
+        <a href="{% url 'ped:pedido_one' enc.id %}" class="btn btn-success" target="_pedido">Imprimir</a>
+        <a href="{% url 'ped:pedido_list' %}" class="btn btn-info">Cancelar</a>
     </div>
     <div class="card-body">
         <div class="content">
@@ -298,7 +298,7 @@
                 mensaje("Cliente No Seleccionado",'red');
                 return false;
             }
-            abrir_modal("{% url 'fac:factura_producto' %}");
+            abrir_modal("{% url 'ped:pedido_producto' %}");
         });
 
         $("#codigo").keypress(function(e){
@@ -322,7 +322,7 @@
         // $('#enc_cliente').select2().select2('val', $('#enc_cliente option:eq(1)').val());
         // https://select2.org/programmatic-control/add-select-clear-items
         $("#enc_cliente").data('select2').trigger('select', {
-            data: {"id": {% if enc %} {{ enc.cliente.id }} {% else %} 1 {% endif %} }
+            data: { "id": {% if enc %} {{ enc.cliente.id }} {% else %} 1 {% endif %} }
         });
     });
 
@@ -334,7 +334,7 @@
             icon:"fab fa-keycdn",
             type:'red',
             title: "Confirmación Requerida",
-            content: 'url:/fac/facturas/borrar-detalle/' + id,
+            content: 'url:/ped/pedidos/borrar-detalle/' + id,
             onContentReady: function () {
                 var self = this;
                 this.$content.find('#usuario').val('{{ user.username }}');
@@ -372,7 +372,7 @@
                             headers: { "X-CSRFToken": token },
                             type:"POST",
                             data:data,
-                            url: '/fac/facturas/borrar-detalle/' + id,
+                            url: '/ped/pedidos/borrar-detalle/' + id,
                             success: function(r){
                                 console.log(r);
                                 if(r==="ok"){
@@ -418,7 +418,7 @@
             //alert(url);
             // abrir_modal(url);
         }else{
-            url = "/fac/facturas/clientes/" + idCliente + qs;
+            url = "/ped/pedidos/clientes/" + idCliente + qs;
             //alert(url);
             // abrir_modal(url);
         }

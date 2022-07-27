@@ -1,6 +1,7 @@
 from django.urls import path, include
 
 from .views import BarrioView, BarrioNew, BarrioEdit, barrioInactivar, \
+    RepartidorView, RepartidorNew, RepartidorEdit, repartidorInactivar, \
     RutaView, RutaNew, RutaEdit, rutaInactivar, \
     ClienteView,ClienteNew,ClienteEdit,clienteInactivar, \
     FacturaView, facturas, \
@@ -18,11 +19,15 @@ urlpatterns = [
     path('barrios/<int:pk>',BarrioEdit.as_view(), name="barrio_edit"),
     path('barrios/estado/<int:id>',barrioInactivar, name="barrio_inactivar"),
     
+    path('repartidores/',RepartidorView.as_view(), name="repartidor_list"),
+    path('repartidores/new',RepartidorNew.as_view(), name="repartidor_new"),
+    path('repartidores/<int:pk>',RepartidorEdit.as_view(), name="repartidor_edit"),
+    path('repartidores/estado/<int:id>',repartidorInactivar, name="repartidor_inactivar"),
+
     path('rutas/',RutaView.as_view(), name="ruta_list"),
     path('rutas/new',RutaNew.as_view(), name="ruta_new"),
     path('rutas/<int:pk>',RutaEdit.as_view(), name="ruta_edit"),
     path('rutas/estado/<int:id>',rutaInactivar, name="ruta_inactivar"),
-    
     
     path('clientes/',ClienteView.as_view(), name="cliente_list"),
     path('clientes/new',ClienteNew.as_view(), name="cliente_new"),

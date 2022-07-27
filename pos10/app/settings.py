@@ -27,10 +27,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-$8c9od2wz==s=w0qgz^d$^r^-zz4dr8#tsil=a1)&3_72+!9mb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 #ALLOWED_HOSTS = ["127.0.0.1",".herokuapp.com"]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['osvicorn.pythonanywhere.com']
 
 
 # Application definition
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'inv',
     'cmp',
     'fac',
+    'tca',
+    'ped',
     'django_userforeignkey',
     'rest_framework',
 ]
@@ -90,12 +92,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sifa10',
-        'HOST': 'localhost',
-        'USER': 'postgres',
+        'HOST': 'osvicorn-2747.postgres.pythonanywhere-services.com',
+        'USER': 'super',
         'PASSWORD': 'Oscor_1964',
-        'PORT': 5432
+        'PORT': 12747
     }
 }
+
 
 
 # Password validation
@@ -148,5 +151,7 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+
+#db_from_env = dj_database_url.config(conn_max_age=500)
+#DATABASES['default'].update(db_from_env)
