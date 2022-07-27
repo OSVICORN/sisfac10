@@ -241,6 +241,7 @@
         }
 
         var path = "{% url 'api:producto_list' %}" + codigo;
+
         $.ajax({
             type:"GET",
             url: path,
@@ -321,7 +322,7 @@
         // $('#enc_cliente').select2().select2('val', $('#enc_cliente option:eq(1)').val());
         // https://select2.org/programmatic-control/add-select-clear-items
         $("#enc_cliente").data('select2').trigger('select', {
-            data: {"id": {{ enc.cliente.id }}}
+            data: {"id": {% if enc %} {{ enc.cliente.id }} {% else %} 1 {% endif %} }
         });
     });
 

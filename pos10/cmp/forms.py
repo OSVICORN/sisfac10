@@ -7,7 +7,7 @@ class ProveedorForm(forms.ModelForm):
     class Meta:
         model=Proveedor
         exclude = ['um','fm','uc','fc']
-        widget={'descripcion': forms.TextInput()}
+        widget={'nombre': forms.TextInput()}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
