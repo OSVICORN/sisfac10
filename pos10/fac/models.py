@@ -5,6 +5,8 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db.models import Sum
 
+from django.contrib.auth.models import User
+from django_userforeignkey.models.fields import UserForeignKey
 from bases.models import ClaseModelo, ClaseModelo2
 from inv.models import Producto
 
@@ -25,6 +27,45 @@ class Barrio(ClaseModelo):
     class Meta:
         verbose_name_plural = "Barrios"
 
+class Repartidor(ClaseModelo):
+    identificacion = models.CharField(
+        max_length=12,
+        help_text='Identificación',
+        unique=True
+        )
+    apellidos = models.CharField(
+        max_length=30,
+        help_text='Apellidos del Repartidor',
+        unique=True
+        )
+    nombres = models.CharField(
+        max_length=30,
+        help_text='Nombres del Repartidor',
+        unique=True
+        )
+    direccion = models.CharField(
+        max_length=60,
+        help_text='Dirección',
+        unique=True
+        )
+    celular = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True
+    )
+    correo = models.EmailField(max_length=250)
+
+    def __str__(self):
+        return '{}'.format(self.nombre)
+
+    def save(self):
+        self.apellidos = self.apellidos.upper()
+        self.nombres = self.nombres.upper()
+        super(Ruta, self).save()
+
+    class Meta:
+        verbose_name_plural = "Repartidores"
+
 class Ruta(ClaseModelo):
     nombre = models.CharField(
         max_length=60,
@@ -36,6 +77,7 @@ class Ruta(ClaseModelo):
         help_text='Descripción de la Ruta',
         unique=True
         )
+    repartidor = models.ForeignKey(Repartidor, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return '{}'.format(self.nombre)

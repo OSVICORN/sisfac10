@@ -12,8 +12,8 @@ from django.contrib.auth import authenticate
 
 from bases.views import SinPrivilegios
 
-from .models import Barrio, Ruta, Cliente, FacturaEnc, FacturaDet
-from .forms import BarrioForm, RutaForm, ClienteForm
+from .models import Barrio, Repartidor, Ruta, Cliente, FacturaEnc, FacturaDet
+from .forms import BarrioForm, RepartidorForm, RutaForm, ClienteForm
 import inv.views as inv
 from inv.models import Producto
 
@@ -36,7 +36,6 @@ class BarrioNew(SuccessMessageMixin,SinPrivilegios,\
     def form_valid(self, form):
         form.instance.uc = self.request.user
         return super().form_valid(form)
-
 
 class BarrioEdit(SuccessMessageMixin,SinPrivilegios, \
     generic.UpdateView):
@@ -61,6 +60,54 @@ def barrioInactivar(request,id):
         if barrio:
             barrio.estado = not barrio.estado
             barrio.save()
+            return HttpResponse("OK")
+        return HttpResponse("FAIL")
+    
+    return HttpResponse("FAIL")
+
+class RepartidorView(SinPrivilegios, generic.ListView):
+    model = Repartidor
+    template_name = "fac/repartidor_list.html"
+    context_object_name = "obj"
+    permission_required="cmp.view_repartidor"
+
+class RepartidorNew(SuccessMessageMixin,SinPrivilegios,\
+    generic.CreateView):
+    permission_required="inv.add_repartidor"
+    model=Repartidor
+    template_name="fac/repartidor_form.html"
+    context_object_name = "obj"
+    form_class=RepartidorForm
+    success_url=reverse_lazy("fac:repartidor_list")
+    success_message="Repartidor Creado Satisfactoriamente"
+
+    def form_valid(self, form):
+        form.instance.uc = self.request.user
+        return super().form_valid(form)
+
+class RepartidorEdit(SuccessMessageMixin,SinPrivilegios, \
+    generic.UpdateView):
+    permission_required="inv.change_repartidor"
+    model=Repartidor
+    template_name="fac/repartidor_form.html"
+    context_object_name = "obj"
+    form_class=RutaForm
+    success_url=reverse_lazy("fac:repartidor_list")
+    success_message="Repartidor Actualizada Satisfactoriamente"
+
+    def form_valid(self, form):
+        form.instance.um = self.request.user.id
+        return super().form_valid(form)
+
+@login_required(login_url="/login/")
+@permission_required("fac.change_repartidor",login_url="/login/")
+def repartidorInactivar(request,id):
+    repartidor = Repartidor.objects.filter(pk=id).first()
+
+    if request.method=="POST":
+        if repartidor:
+            repartidor.estado = not repartidor.estado
+            repartidor.save()
             return HttpResponse("OK")
         return HttpResponse("FAIL")
     

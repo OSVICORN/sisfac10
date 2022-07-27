@@ -3,7 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django_userforeignkey.models.fields import UserForeignKey
 
-
 class ClaseModelo(models.Model):
     estado = models.BooleanField(default=True)
     fc = models.DateTimeField(auto_now_add=True)
@@ -13,7 +12,6 @@ class ClaseModelo(models.Model):
 
     class Meta:
         abstract=True
-
 
 class ClaseModelo2(models.Model):
     estado = models.BooleanField(default=True)
@@ -27,8 +25,6 @@ class ClaseModelo2(models.Model):
     class Meta:
         abstract=True
 
-
-
 class Idioma(models.Model):
     nombre = models.CharField(max_length=50)
 
@@ -37,7 +33,6 @@ class Idioma(models.Model):
 
     def __str__(self):
         return self.nombre
-
 
 class Frase(models.Model):
     idioma = models.ForeignKey(Idioma,on_delete=models.CASCADE)

@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Sistema Compras e Inventario por DEBS Consultores</title>
+  <title>Sistema Compras e Inventario por GLOBAL S. de H. - OVC</title>
 
   <!-- Custom fonts for this template-->
   <link href="{% static  'base/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -128,8 +128,48 @@
             <a class="collapse-item {% if cmp_url in request.path  %} active {% endif %}" href="{% url 'cmp:compras_list' %}">Compras</a>
 
             <h6 class="collapse-header">Salidas</h6>
+            <a class="collapse-item" href="{% url 'ped:pedido_list' %}">Pedidos</a>
             <a class="collapse-item" href="{% url 'fac:factura_list' %}">Facturas</a>
-
+          </div>
+        </div>
+      </li>
+      <li class="nav-item {% if cat_url in request.path or s_cat_url in request.path  %} active {% endif %}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Tesorería</span>
+        </a>
+        <div id="collapseTwo" class="collapse {% if cat_url in request.path or s_cat_url in request.path %} show {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Movimientos</h6>
+            {% if perms.inv.view_categoria %}
+            <a class="collapse-item {% if cat_url in request.path %}  {% endif %}" href="{{cat_url}}">Notas Débito</a>
+            {% endif %}
+            {% if perms.inv.view_subcategoria %}
+            <a class="collapse-item {% if s_cat_url in request.path %} {% endif %}" href="{{s_cat_url}}">Notas Crédito</a>
+            {% endif %}
+            {% if perms.inv.view_marca %}
+            <a class="collapse-item" href="{% url 'inv:marca_list' %}">Recibos de Caja</a>
+            {% endif %}
+          </div>
+        </div>
+      </li>
+      <li class="nav-item {% if cat_url in request.path or s_cat_url in request.path  %} active {% endif %}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Cartera</span>
+        </a>
+        <div id="collapseTwo" class="collapse {% if cat_url in request.path or s_cat_url in request.path %} show {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Informes y Graficas</h6>
+            {% if perms.inv.view_categoria %}
+            <a class="collapse-item {% if cat_url in request.path %}  {% endif %}" href="{{cat_url}}">Cartera por Edades</a>
+            {% endif %}
+            {% if perms.inv.view_subcategoria %}
+            <a class="collapse-item {% if s_cat_url in request.path %} {% endif %}" href="{{s_cat_url}}">Facturas por Cliente</a>
+            {% endif %}
+            {% if perms.inv.view_marca %}
+            <a class="collapse-item" href="{% url 'inv:marca_list' %}">Predicción de Ventas</a>
+            {% endif %}
           </div>
         </div>
       </li>
