@@ -29,7 +29,15 @@
                                 value="{% if obj %} {{ obj.descripcion }} {% endif %}">
                             </div>
                         </div>
-
+                    </div>
+                    <div><br></div>
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="input-group">
+                                <input type="text" name="repartidor" maxlength="100" class="form-control" required id="id_repartidor" placeholder="Repartidor"
+                                value="{% if obj %} {{ obj.repartidor }} {% endif %}">
+                            </div>
+                        </div>
                         <div class="col-2">
                             <div class="form-group">
                                 <label for="id_estado">Estado</label>
@@ -37,7 +45,6 @@
                                 {% if obj.estado %} checked {% endif %} >
                             </div>
                         </div> 
-                        <!-- {{ form.as_p }} -->
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="row">

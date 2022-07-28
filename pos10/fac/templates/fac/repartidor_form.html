@@ -13,23 +13,54 @@
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        {% if obj %} Editar {% else %} Nueva {% endif %} Ruta
+                        {% if obj %} Editar {% else %} Nuevo {% endif %} Repartidor
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="row">
-                        <div class="col-5">
+                        <div class="col-3">
                             <div class="input-group">
-                                <input type="text" name="nombre" maxlength="100" class="form-control" required id="id_nombre" placeholder="Nombre"
-                                value="{% if obj %} {{ obj.nombre }} {% endif %}">
+                                <input type="text" name="identificacion" maxlength="12" class="form-control" required id="id_identificacion" placeholder="Identificación"
+                                value="{% if obj %} {{ obj.identificacion }} {% endif %}">
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="input-group">
-                                <input type="text" name="descripcion" maxlength="100" class="form-control" required id="id_descripcion" placeholder="Descripción"
-                                value="{% if obj %} {{ obj.descripcion }} {% endif %}">
+                                <input type="text" name="apellidos" maxlength="" class="form-control" required id="id_apellidos" placeholder="Apellidos"
+                                value="{% if obj %} {{ obj.apellidos }} {% endif %}">
                             </div>
                         </div>
 
+                        <div class="col-4">
+                            <div class="input-group">
+                                <input type="text" name="nombres" maxlength="" class="form-control" required id="id_nombres" placeholder="Nombres"
+                                value="{% if obj %} {{ obj.nombres }} {% endif %}">
+                            </div>
+                        </div> 
+                        <!-- {{ form.as_p }} -->
+                    </div>
+                    <div><br></div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="input-group">
+                                <input type="text" name="direccion" maxlength="80" class="form-control" required id="id_direccion" placeholder="Direccion"
+                                value="{% if obj %} {{ obj.direccion }} {% endif %}">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group">
+                                <input type="text" name="celular" maxlength="10" class="form-control" required id="id_celular" placeholder="Celular"
+                                value="{% if obj %} {{ obj.celular }} {% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <div><br></div>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="input-group">
+                                <input type="text" name="correo" maxlength="100" class="form-control" required id="id_correo" placeholder="Correo"
+                                value="{% if obj %} {{ obj.correo }} {% endif %}">
+                            </div>
+                        </div>
                         <div class="col-2">
                             <div class="form-group">
                                 <label for="id_estado">Estado</label>
@@ -43,7 +74,7 @@
                     <div class="row">
                         <div class="col">
                             <button type="submit" class="btn btn-danger"><span class="fa fa-save"></span> Guardar</button>
-                            <a href="{% url 'fac:ruta_list' %}" class="btn btn-success"><span class="fa fa-undo"></span>Cancelar</a>
+                            <a href="{% url 'fac:repartidor_list' %}" class="btn btn-success"><span class="fa fa-undo"></span>Cancelar</a>
                         </div>
                     </div>
                 </div>

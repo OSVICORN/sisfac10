@@ -91,7 +91,7 @@ class RepartidorEdit(SuccessMessageMixin,SinPrivilegios, \
     model=Repartidor
     template_name="fac/repartidor_form.html"
     context_object_name = "obj"
-    form_class=RutaForm
+    form_class=RepartidorForm
     success_url=reverse_lazy("fac:repartidor_list")
     success_message="Repartidor Actualizada Satisfactoriamente"
 

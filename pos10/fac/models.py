@@ -56,12 +56,12 @@ class Repartidor(ClaseModelo):
     correo = models.EmailField(max_length=250)
 
     def __str__(self):
-        return '{}'.format(self.nombre)
+        return '{} . {}'.format(self.apellidos, self.nombres)
 
     def save(self):
         self.apellidos = self.apellidos.upper()
         self.nombres = self.nombres.upper()
-        super(Ruta, self).save()
+        super(Repartidor, self).save()
 
     class Meta:
         verbose_name_plural = "Repartidores"

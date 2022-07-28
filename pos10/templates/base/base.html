@@ -109,6 +109,9 @@
             {% if perms.fac.view_ruta %}
             <a class="collapse-item" href="{% url 'fac:ruta_list' %}">Rutas</a>
             {% endif %}
+            {% if perms.fac.view_repartidor %}
+            <a class="collapse-item" href="{% url 'fac:repartidor_list' %}">Repartidores</a>
+            {% endif %}
             {% if perms.fac.view_cliente %}
             <a class="collapse-item" href="{% url 'fac:cliente_list' %}">Clientes</a>
             {% endif %}
