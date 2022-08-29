@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-$8c9od2wz==s=w0qgz^d$^r^-zz4dr8#tsil=a1)&3_72+!9mb
 DEBUG = False
 
 #ALLOWED_HOSTS = ["127.0.0.1",".herokuapp.com"]
-ALLOWED_HOSTS = ['osvicorn.pythonanywhere.com']
+ALLOWED_HOSTS = ['osvicorn.pythonanywhere.com',"127.0.0.1",".herokuapp.com"]
 
 
 # Application definition
@@ -92,10 +92,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sifa10',
-        'HOST': 'osvicorn-2747.postgres.pythonanywhere-services.com',
-        'USER': 'super',
+        #'HOST': 'osvicorn-2747.postgres.pythonanywhere-services.com',
+        'HOST': 'localhost',
+        'USER': 'postgres',
         'PASSWORD': 'Oscor_1964',
-        'PORT': 12747
+        #'PORT': 12747
+        'PORT': 5432
     }
 }
 
