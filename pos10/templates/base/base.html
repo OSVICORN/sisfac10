@@ -68,16 +68,20 @@
 
       {% url 'inv:categoria_list' as cat_url %}
       {% url 'inv:subcategoria_list' as s_cat_url %}
+      {% url 'inv:marca_list' as mar_url %}
+      {% url 'inv:um_list' as ume_url %}
+      {% url 'inv:producto_list' as pro_url %}
+
       {% url 'cmp:compras_list' as cmp_url %}
 
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item {% if cat_url in request.path or s_cat_url in request.path  %} active {% endif %}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           <i class="fas fa-fw fa-cog"></i>
           <span>Catálogos</span>
         </a>
-        <div id="collapseTwo" class="collapse {% if cat_url in request.path or s_cat_url in request.path %} show {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseOne" class="collapse {% if cat_url in request.path or s_cat_url in request.path %} show {% endif %}" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Catálogos de Inventario</h6>
             {% if perms.inv.view_categoria %}
@@ -87,13 +91,13 @@
             <a class="collapse-item {% if s_cat_url in request.path %} active {% endif %}" href="{{s_cat_url}}">Sub Categorias</a>
             {% endif %}
             {% if perms.inv.view_marca %}
-            <a class="collapse-item" href="{% url 'inv:marca_list' %}">Marca</a>
+            <a class="collapse-item {% if mar_url in request.path %} active {% endif %}" href="{{mar_url}}">Marca</a>
             {% endif %}
             {% if perms.inv.view_unidadmedida %}
-            <a class="collapse-item" href="{% url 'inv:um_list' %}">Unidad Medida</a>
+            <a class="collapse-item {% if um_url in request.path %} active {% endif %}" href="{{ume_url}}">Unidad Medida</a>
             {% endif %}
             {% if perms.inv.view_producto %}
-            <a class="collapse-item" href="{% url 'inv:producto_list' %}">Producto</a>
+            <a class="collapse-item {% if pro_url in request.path %} active {% endif %}" href="{{pro_url}}">Producto</a>
             {% endif %}
             
             <h6 class="collapse-header">Catálogos de Compras:</h6>
@@ -120,7 +124,7 @@
           </div>
         </div>
       </li>
-      <li class="nav-item {% if cmp_url in request.path  %} active {% endif %}">
+      <li class="nav-item {% if cmp_url in request.path %} active {% endif %}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompras" aria-expanded="true" aria-controls="collapseCompras">
           <i class="fas fa-fw fa-truck"></i>
           <span>Movimientos</span>
@@ -136,7 +140,8 @@
           </div>
         </div>
       </li>
-      <li class="nav-item {% if cat_url in request.path or s_cat_url in request.path  %} active {% endif %}">
+      {% comment %} <li class="nav-item {% if cat_url in request.path or s_cat_url in request.path  %} active {% endif %}"> {% endcomment %}
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
           <span>Tesorería</span>
@@ -157,11 +162,11 @@
         </div>
       </li>
       <li class="nav-item {% if cat_url in request.path or s_cat_url in request.path  %} active {% endif %}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInformes" aria-expanded="true" aria-controls="collapseInformes">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Cartera</span>
+          <span>Informes</span>
         </a>
-        <div id="collapseTwo" class="collapse {% if cat_url in request.path or s_cat_url in request.path %} show {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseInformes" class="collapse {% if cat_url in request.path or s_cat_url in request.path %} show {% endif %}" aria-labelledby="headingCartera" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Informes y Graficas</h6>
             {% if perms.inv.view_categoria %}
@@ -171,7 +176,7 @@
             <a class="collapse-item {% if s_cat_url in request.path %} {% endif %}" href="{{s_cat_url}}">Facturas por Cliente</a>
             {% endif %}
             {% if perms.inv.view_marca %}
-            <a class="collapse-item" href="{% url 'inv:marca_list' %}">Predicción de Ventas</a>
+            <a class="collapse-item" href="{% url 'inf:prediccion_seleccion' %}">Predicción de Ventas</a>
             {% endif %}
           </div>
         </div>
@@ -527,6 +532,7 @@
     {
 
       $("#popup").load(url, function(){
+        //alert(url)
         $(this).modal({
           backdrop:'static',
           keyboard: false

@@ -1,3 +1,4 @@
+from operator import mod
 from django.db import models
 
 #Para los signals
@@ -7,14 +8,19 @@ from django.db.models import Sum
 
 from bases.models import ClaseModelo2
 from inv.models import Producto
-from fac.models import Cliente
+from fac.models import Cliente, Repartidor
 
 class PedidoEnc(ClaseModelo2):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)
+    fecha_entrega = models.DateTimeField(auto_now_add=True)
+    repartidor = models.ForeignKey(Repartidor, on_delete=models.CASCADE, default=1)
     sub_total=models.FloatField(default=0)
     descuento=models.FloatField(default=0)
     total=models.FloatField(default=0)
+    facturado = models.CharField(max_length=1, default='N')
+    mail_repartidor = models.IntegerField(default=False)
+    mail_cliente = models.IntegerField(default=False)
 
     def __str__(self):
         return '{}'.format(self.id)
@@ -43,8 +49,8 @@ class PedidoDet(ClaseModelo2):
         return '{}'.format(self.producto)
 
     def save(self):
-        self.sub_total = float(float(int(self.cantidad)) * float(self.precio))
-        self.total = self.sub_total - float(self.descuento)
+        self.sub_total = float(self.cantidad) * float(self.precio)
+        self.total = float(self.sub_total) - float(self.descuento)
         super(PedidoDet, self).save()
     
     class Meta:
@@ -53,7 +59,6 @@ class PedidoDet(ClaseModelo2):
         permissions = [
             ('sup_caja_pedidodet','Permisos de Supervisor de Pedidos Detalle')
         ]
-
 
 @receiver(post_save, sender=PedidoDet)
 def detalle_ped_guardar(sender,instance,**kwargs):
@@ -75,3 +80,28 @@ def detalle_ped_guardar(sender,instance,**kwargs):
         enc.sub_total = sub_total
         enc.descuento = descuento
         enc.save()
+
+    prod=Producto.objects.filter(pk=producto_id).first()
+    if prod:
+        cantidad = int(prod.existencia) - int(instance.cantidad)
+        prod.existencia = cantidad
+        prod.save()
+
+@receiver(post_delete, sender=PedidoDet)
+def detalle_pedido_borrar(sender,instance, **kwargs):
+    id_producto = instance.producto.id
+    id_pedido = instance.pedido.id
+
+    enc = PedidoEnc.objects.filter(pk=id_pedido).first()
+    if enc:
+        sub_total = PedidoDet.objects.filter(pedido=id_pedido).aggregate(Sum('sub_total'))
+        descuento = PedidoDet.objects.filter(pedido=id_pedido).aggregate(Sum('descuento'))
+        enc.sub_total=sub_total['sub_total__sum']
+        enc.descuento=descuento['descuento__sum']
+        enc.save()
+    
+    prod=Producto.objects.filter(pk=id_producto).first()
+    if prod:
+        cantidad = int(prod.existencia) + int(instance.cantidad)
+        prod.existencia = cantidad
+        prod.save()

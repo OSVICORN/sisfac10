@@ -56,7 +56,7 @@ class Repartidor(ClaseModelo):
     correo = models.EmailField(max_length=250)
 
     def __str__(self):
-        return '{} . {}'.format(self.apellidos, self.nombres)
+        return '{} {}'.format(self.apellidos, self.nombres)
 
     def save(self):
         self.apellidos = self.apellidos.upper()
@@ -229,9 +229,7 @@ def detalle_fac_guardar(sender,instance,**kwargs):
 
     prod=Producto.objects.filter(pk=producto_id).first()
     if prod:
+        print(instance)
         cantidad = int(prod.existencia) - int(instance.cantidad)
         prod.existencia = cantidad
         prod.save()
-
-
-

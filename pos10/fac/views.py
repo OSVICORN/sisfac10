@@ -224,12 +224,12 @@ class ClienteEdit(VistaBaseEdit):
         except:
             t = None
 
-        print(t)
+        #print(t)
         self.object = self.get_object()
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         context = self.get_context_data(object=self.object, form=form,t=t)
-        print(form_class,form,context)
+        #print(form_class,form,context)
         return self.render_to_response(context)
 
 
@@ -388,12 +388,12 @@ def borrar_detalle_factura(request, id):
             return HttpResponse("Usuario Inactivo")
 
         if user.is_superuser or user.has_perm("fac.sup_caja_facturadet"):
-            det.id = None
-            det.cantidad = (-1 * det.cantidad)
-            det.sub_total = (-1 * det.sub_total)
-            det.descuento = (-1 * det.descuento)
-            det.total = (-1 * det.total)
-            det.save()
+            #det.id = None
+            #det.cantidad = (-1 * det.cantidad)
+            #det.sub_total = (-1 * det.sub_total)
+            #det.descuento = (-1 * det.descuento)
+            #det.total = (-1 * det.total)
+            det.delete()
 
             return HttpResponse("ok")
 

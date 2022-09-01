@@ -26,7 +26,8 @@ urlpatterns = [
     path('cmp/', include(('cmp.urls', 'cmp'), namespace='cmp')),
     path('fac/', include(('fac.urls', 'fac'), namespace='fac')),
     path('ped/', include(('ped.urls', 'ped'), namespace='ped')),
-    path('tca/', include(('tca.urls', 'tca'), namespace='tca')),   
+    path('tca/', include(('tca.urls', 'tca'), namespace='tca')),
+    path('inf/', include(('inf.urls', 'tca'), namespace='inf')),
     path('api/', include(('api.urls', 'api'), namespace='api')),
     
     path('admin/', admin.site.urls),

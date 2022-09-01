@@ -171,12 +171,9 @@
                                 <td>{{ item.sub_total }}</td>
                                 <td>{{ item.descuento }}</td>
                                 <td>{{ item.total }}</td>
-                            <td>
-                                <button type="button" class="btn btn-warning btn-circle"
-                                    onclick="borrar_detalle({{ item.id }})">
-                                    <i class="fas fa-history"></i>
-                                </button>
-                            </td>
+                                <td>
+                                    <button class="btn btn-danger btn-circle" onclick="return abrir_modal('{% url 'ped:pedidos_del' enc.id item.id %}')"><i class="fas fa-trash-alt"></i></button>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -251,7 +248,7 @@
                 console.log(r.estado);
 
                 if(r.existencia<=0 || !r.estado){
-                    mensaje("Producto No Tiene Existencia o está inactivo",'orange')
+                    mensaje("Producto No Tiene Existencia o está inactivo",'orange');
                     $("#codigo").val("");
                     $("#descripcion").val("");
                     $("#precio").val("0.00");
@@ -288,6 +285,7 @@
 
     $(function () {
         $("#sidebarToggle").click();
+
         $('#enc_cliente').select2({
             placeholder: "Seleccione Cliente",
             allowClear: true
@@ -319,10 +317,17 @@
         $("#descuento").val("{{ enc.descuento }}");
         $("#total").val({{ enc.total }});
 
+        var idcli = $("#enc_cliente").val();
+        if (idcli==null){
+            idcli = 1
+        }
+
         // $('#enc_cliente').select2().select2('val', $('#enc_cliente option:eq(1)').val());
         // https://select2.org/programmatic-control/add-select-clear-items
+        
         $("#enc_cliente").data('select2').trigger('select', {
-            data: { "id": {% if enc %} {{ enc.cliente.id }} {% else %} 1 {% endif %} }
+            //data: { "id": {% if enc %} {{ enc.cliente.id }} {% else %} $("#enc_cliente").val("1"); {% endif %} }
+            data: { "id": idcli }
         });
     });
 
@@ -365,7 +370,7 @@
                         }
 
                         var data = {"usuario":usuario.val(),"pass":pass.val()};
-	                    console.log(data);
+	                    //console.log(data);
 
                         var token = '{{csrf_token}}';
                         $.ajax({
@@ -396,8 +401,8 @@
         var existencia = +$("#existencia").val();
         var cantidad = +$("#cantidad").val();
 
-        alert(existencia);
-        alert(cantidad);
+        //alert(existencia);
+        //alert(cantidad);
         if(cantidad>existencia){
             mensaje("No hay existencia suficiente");
             return false;
@@ -418,7 +423,7 @@
             //alert(url);
             // abrir_modal(url);
         }else{
-            url = "/ped/pedidos/clientes/" + idCliente + qs;
+            url = "/fac/facturas/clientes/" + idCliente + qs;
             //alert(url);
             // abrir_modal(url);
         }
@@ -435,12 +440,12 @@ $("#popup").on('hidden.bs.modal',function(){
         url:url,
         success: function(data){
             console.log(data)
-            $("#enc_cliente").find('option').remove()
-            $("#enc_cliente").append('<option value="0">Seleccione Cliente</option>')
+            //$("#enc_cliente").find('option').remove()
+            //$("#enc_cliente").append('<option value="0">Seleccione Cliente</option>')
             for(var i=0;i<data.length;i++){
                 $("#enc_cliente").append(`<option value="${data[i].id}">${data[i].nombres} ${data[i].apellidos} </option>`)
             }
-            $("#enc_cliente").val(a).change()
+            //$("#enc_cliente").val(a).change()
         },
         error: function(data){
             console.log(data)
