@@ -248,7 +248,7 @@
                 console.log(r.estado);
 
                 if(r.existencia<=0 || !r.estado){
-                    mensaje("Producto No Tiene Existencia o está inactivo",'orange')
+                    mensaje("Producto No Tiene Existencia o está inactivo",'orange');
                     $("#codigo").val("");
                     $("#descripcion").val("");
                     $("#precio").val("0.00");
@@ -285,6 +285,7 @@
 
     $(function () {
         $("#sidebarToggle").click();
+
         $('#enc_cliente').select2({
             placeholder: "Seleccione Cliente",
             allowClear: true
@@ -316,15 +317,27 @@
         $("#descuento").val("{{ enc.descuento }}");
         $("#total").val({{ enc.total }});
 
+<<<<<<< HEAD
         idcli = $("#enc_cliente").val("")
         if (idcli==="0" || idcli===null){
             mensaje("Cliente No Seleccionado",'red');
             return false;
         }        
+=======
+        var idcli = $("#enc_cliente").val();
+        if (idcli==null){
+            idcli = 1
+        }
+>>>>>>> 6e6ef33bed350f1424b1827a727c84d005e8e586
 
         // $('#enc_cliente').select2().select2('val', $('#enc_cliente option:eq(1)').val());
         // https://select2.org/programmatic-control/add-select-clear-items
+        
         $("#enc_cliente").data('select2').trigger('select', {
+<<<<<<< HEAD
+=======
+            //data: { "id": {% if enc %} {{ enc.cliente.id }} {% else %} $("#enc_cliente").val("1"); {% endif %} }
+>>>>>>> 6e6ef33bed350f1424b1827a727c84d005e8e586
             data: { "id": idcli }
         });
     });
