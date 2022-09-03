@@ -83,11 +83,7 @@ def pedidos(request,id=None):
             encabezado = {
                 'id':0,
                 'fecha':datetime.today(),
-<<<<<<< HEAD
                 'cliente':0,
-=======
-                'cliente':1,
->>>>>>> 6e6ef33bed350f1424b1827a727c84d005e8e586
                 'fecha_entrega':datetime.today(),
                 'total': 0.00
             }

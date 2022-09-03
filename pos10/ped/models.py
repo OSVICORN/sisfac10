@@ -14,11 +14,7 @@ class PedidoEnc(ClaseModelo2):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)
     fecha_entrega = models.DateTimeField(auto_now_add=True)
-<<<<<<< HEAD
-    repartidor = models.ForeignKey(Repartidor, on_delete=models.CASCADE)
-=======
     repartidor = models.ForeignKey(Repartidor, on_delete=models.CASCADE, default=1)
->>>>>>> 6e6ef33bed350f1424b1827a727c84d005e8e586
     sub_total=models.FloatField(default=0)
     descuento=models.FloatField(default=0)
     total=models.FloatField(default=0)
