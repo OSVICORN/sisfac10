@@ -29,7 +29,7 @@ class SubCategoria(ClaseModelo):
 
     def __str__(self):
         return '{}:{}'.format(self.categoria.descripcion,self.descripcion)
-
+    
     def save(self):
         self.descripcion = self.descripcion.upper()
         super(SubCategoria, self).save()
@@ -89,15 +89,15 @@ class Producto(ClaseModelo):
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
     unidad_medida = models.ForeignKey(UnidadMedida, on_delete=models.CASCADE)
     subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE)
-    foto = models.ImageField(upload_to="images/",default="images/default.png")
+    foto = models.ImageField(upload_to="images/",null=True,blank=True)
 
     def __str__(self):
         return '{}'.format(self.descripcion)
-
+    
     def save(self):
         self.descripcion = self.descripcion.upper()
         super(Producto,self).save()
-
+    
     class Meta:
         verbose_name_plural = "Productos"
         unique_together = ('codigo','codigo_barra')

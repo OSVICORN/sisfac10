@@ -18,7 +18,7 @@ class BarrioForm(forms.ModelForm):
 class RutaForm(forms.ModelForm):
     class Meta:
         model=Ruta
-        #fields=[]
+        #fields=['nombre','descripcion','repartidor','estado']
         exclude = ['um','fm','uc','fc']
 
     def __init__(self, *args, **kwargs):
@@ -27,6 +27,7 @@ class RutaForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
             })
+        self.fields['repartidor'].empty_label =  "Seleccione Repartidor"
 
 class RepartidorForm(forms.ModelForm):
     class Meta:
@@ -53,3 +54,6 @@ class ClienteForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
             })
+        self.fields['documento'].empty_label =  "No. de Documento"
+        self.fields['barrio'].empty_label =  "Seleccione Barrio"
+        self.fields['ruta'].empty_label =  "Seleccione Ruta"

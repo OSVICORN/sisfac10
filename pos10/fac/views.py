@@ -195,14 +195,14 @@ class ClienteNew(VistaBaseCreate):
     permission_required="fac.add_cliente"
 
     def get(self, request, *args, **kwargs):
-        print("sobre escribir get")
+        #print("sobre escribir get")
         
         try:
             t = request.GET["t"]
         except:
             t = None
 
-        print(t)
+        #print(t)
         
         form = self.form_class(initial=self.initial)
         return render(request, self.template_name, {'form': form, 't':t})
@@ -388,12 +388,12 @@ def borrar_detalle_factura(request, id):
             return HttpResponse("Usuario Inactivo")
 
         if user.is_superuser or user.has_perm("fac.sup_caja_facturadet"):
-            det.id = None
-            det.cantidad = (-1 * det.cantidad)
-            det.sub_total = (-1 * det.sub_total)
-            det.descuento = (-1 * det.descuento)
-            det.total = (-1 * det.total)
-            det.save()
+            #det.id = None
+            #det.cantidad = (-1 * det.cantidad)
+            #det.sub_total = (-1 * det.sub_total)
+            #det.descuento = (-1 * det.descuento)
+            #det.total = (-1 * det.total)
+            det.delete()
 
             return HttpResponse("ok")
 

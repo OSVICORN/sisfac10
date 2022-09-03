@@ -52,7 +52,10 @@
     <thead>
       <th data-sortable="true" data-field="id">No.</th>        
       <th data-sortable="true" data-field="nombres">Cliente</th>
-      <th data-sortable="true" data-field="apellidos">Total</th>
+      <th data-sortable="true" data-field="fecha">Fecha</th>
+      <th data-sortable="true" data-field="fecha_entrega">Fecha Entrega</th>
+      <th data-sortable="true" data-field="repartidor">Repartidor</th>
+      <th data-sortable="false" data-field="total">Total</th>
       <th data-field="estado">Estado</th>
       <th class="all">Acciones</th>
     </thead>
@@ -61,11 +64,17 @@
       <tr>
         <td>{{ item.id }}</td>
         <td>{{ item.cliente }}</td>
+        <td>{{ item.fecha|date }}</td>
+        <td>{{ item.fecha_entrega }}</td>
+        <td>{{ item.repartidor }}</td>
         <td>{{ item.total }}</td>
         <td>{{item.estado|yesno:"Activo,Inactivo"}}</td>
         <td>
-          <a href="{% url 'ped:pedido_edit' item.id %}" class="href btn btn-warning btn-circle">
+          <a href="{% url 'ped:pedido_edit' item.id %}" data-toggle="tooltip" data-placement="top" title="Editar" class="href btn btn-warning btn-circle">
               <i class="far fa-edit"></i>
+          </a>
+          <a href="{#% url 'ped:pedido_edit' item.id %#}" class="href btn btn-warning btn-circle">
+            <i class="fas fa-envelope"></i>
           </a>
         </td>
       </tr>

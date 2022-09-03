@@ -1,74 +1,279 @@
-<div class="modal-dialog modal-lg">
+{% extends 'base/base.html' %}
+
+{% block content_wrapper %}
+{% endblock content_wrapper %}
+
+{% block page_content %}
+<div class="modal-dialog modal-xl">
     <div class="modal-content">
         {% if obj %}
-        <form role="form" id="frmCliente" action="{% url 'fac:cliente_edit' obj.pk %}" method="post"  class="form-inline">
-        {% else %}
-        <form role="form"  id="frmCliente" action="{% url 'fac:cliente_new' %}" method="post"  class="form-inline">
-        {% endif %}
-            <div class="col-xl-12 col-md-12 mb-12">
-                {% if obj %}
-                <div class="card border-left-warning shadow h-100 py-2">
-                {% else %}
-                <div class="card border-left-success shadow h-100 py-2">
+        <form role="form" action="{% url 'fac:cliente_edit' obj.pk %}" method="post" class="form-inline">
+            {% else %}
+            <form role="form" action="{% url 'fac:cliente_new' %}" method="post" class="form-inline">
                 {% endif %}
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Cliente
-                            {% if t %} En Factura {% endif %}
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        {% csrf_token %}
-                        <div class="row">
-                            <input type="hidden" name="id" id="id" class="form-class frmid">
-                            {{ form.as_p }}
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-danger"><span class="fa fa-save"></span> Guardar</button>
-                                <button type="button" class="btn btn-success" onclick="return cerrar_modal()">
-                                        Cancelar
-                                </button>
+                <div class="col-xl-12 col-md-12 mb-12">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    {% if obj %} Editar {% else %} Nuevo {% endif %} Cliente
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                {% csrf_token %}
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.tipo }}
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="documento" maxlength="100" class="form-control" required
+                                            id="id_documento" placeholder="Documento" value="{% if obj %} {{ obj.documento }} {% endif%}"> -->
+                                                {{ form.documento }}
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <label for="id_estado">Estado</label>
+                                        <input type="checkbox" name="estado" class="form-control" id="id_estado" {% if obj.estado %} checked {% endif %}> -->
+                                                {{ form.nombres }}
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="input-group">
+                                                <!-- <label for="id_estado">Estado</label>
+                                        <input type="checkbox" name="estado" class="form-control" id="id_estado" {% if obj.estado %} checked {% endif %}> -->
+                                                {{ form.apellidos }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.direccion }}
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.barrio }}
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <label for="id_estado">Estado</label>
+                                                <input type="checkbox" name="ruta" class="form-control" id="id_ruta" {% if obj %} {{ form.ruta }} {% endif %}> -->
+                                                {{ form.ruta }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.segmento }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.genero }}
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.fecha_nacimiento }}
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.celular }}
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.correo }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.razonsocial }}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.actividad }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.replegal }}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.contacto }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.celcontacto }}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.correocontacto }}
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.telfijo }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.cupocredito }}
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.trato_datos }}
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <!-- <input type="text" name="descripcion" maxlength="100" class="form-control" required
+                                            id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif%}"> -->
+                                                {{ form.estado }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-g text-success"><i class="fas fa-save"></i>
+                                            Guardar</button>
+                                        <a href="{% url 'fac:cliente_list' %}" class="btn btn-g text-warning"><i
+                                                class="far fa-hand-point-left"></i> Regresar</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <i class="far fa-calendar-plus fa-2x text-gray-300"></i>
-                    </div>
-                    </div>
                 </div>
-                </div>
-            </div>
-        </form>
+            </form>
     </div>
-</div> 
+</div>
+
+{% endblock %}
+
+{% block js_page %}
+
+<!-- <script>
+
+$(document).ready(function() {
+    alert("I am an alert box!");
+});
+
+$('#id_documento').change(function () {
+        alert('jsjsjsjs');
+});
+
+    function activar_campos() {
+        var segm = $("#documento").val();
+        print(segm);
+        if (segm === 'Natural/Detail/Minorista') {
+            console.log('es natural');
+            return true;
+        }
+    }
+
+</script> -->
+
+{% endblock %}
 
 {% if t %}
 <script>
-$("#frmCliente").submit(function( e ) {
-    var frm = $('#frmCliente');
-    // alert("{{request.path}}")
-    $.ajax({
+    $("#frmCliente").submit(function (e) {
+        var frm = $('#frmCliente');
+        $.ajax({
             type: frm.attr('method'),
-            // url: frm.attr('action'),
-            url: "{{request.path}}",
+            url: frm.attr('action'),
             data: frm.serialize(),
             success: function (data) {
-                // alert(data);
-                // window.location.reload(true);
-                $("#id").val(data)
-                console.log(data)
-                cerrar_modal()
+                //alert(data);
+                window.location.reload(true);
             },
-            error: function(data,b,c) {
+            error: function (data) {
                 alert(data);
-                console.log(c)
             }
         });
         return false;
-});
-
+    });
 </script>
 {% endif %}

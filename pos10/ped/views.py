@@ -46,13 +46,15 @@ class PedidoView(SinPrivilegios, generic.ListView):
         # print(user,"usuario")
         qs = super().get_queryset()
         for q in qs:
-            print(q.uc,q.id)
+            pass
+            #print(q.uc,q.id)
         
         if not user.is_superuser:
             qs = qs.filter(uc=user)
 
         for q in qs:
-            print(q.uc,q.id)
+            pass
+            #print(q.uc,q.id)
 
         return qs
 
@@ -82,6 +84,7 @@ def pedidos(request,id=None):
                 'id':0,
                 'fecha':datetime.today(),
                 'cliente':0,
+                'fecha_entrega':datetime.today(),
                 'total': 0.00
             }
             detalle=None
@@ -89,6 +92,7 @@ def pedidos(request,id=None):
             encabezado = {
                 'id':enc.id,
                 'fecha':enc.fecha,
+                'fecha_entrega':enc.fecha_entrega,
                 'cliente':enc.cliente,
                 'total':enc.total
             }
@@ -122,12 +126,18 @@ def pedidos(request,id=None):
         codigo = request.POST.get("codigo")
         cantidad = request.POST.get("cantidad")
         precio = request.POST.get("precio")
+        s_total = request.POST.get("sub_total_detalle")
+        descuento = request.POST.get("descuento_detalle")
         total = request.POST.get("total_detalle")
 
         prod = Producto.objects.get(codigo=codigo)
         det = PedidoDet(
             pedido = enc,
             producto = prod,
+            cantidad = cantidad,
+            precio = precio,
+            sub_total = s_total,
+            descuento = descuento,
             total = total
         )
         
@@ -142,7 +152,7 @@ def pedidos(request,id=None):
 class ProductoView(inv.ProductoView):
     template_name="ped/buscar_producto.html" 
 
-
+'''
 def borrar_detalle_pedido(request, id):
     template_name = "ped/pedido_borrar_detalle.html"
 
@@ -154,6 +164,7 @@ def borrar_detalle_pedido(request, id):
     if request.method == "POST":
         usr = request.POST.get("usuario")
         pas = request.POST.get("pass")
+        prd = request.POST.get("codigo")
 
         user =authenticate(username=usr,password=pas)
 
@@ -164,13 +175,18 @@ def borrar_detalle_pedido(request, id):
             return HttpResponse("Usuario Inactivo")
 
         if user.is_superuser or user.has_perm("ped.sup_caja_pedidodet"):
-            det.id = None
-            det.total = (-1 * det.total)
-            det.save()
-
+            det.delete()
+            
             return HttpResponse("ok")
 
         return HttpResponse("Usuario no autorizado")
     
-    return render(request,template_name,context)
+    return render(request,template_name,context) '''
 
+class PedidoDetDelete(SinPrivilegios, generic.DeleteView):
+    permission_required = "ped.delete_pedidodet"
+    model = PedidoDet
+    template_name = "ped/pedidos_det_del.html"
+    context_object_name = 'obj'
+    success_url=reverse_lazy("ped:pedido_list")
+    
