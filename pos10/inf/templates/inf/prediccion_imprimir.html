@@ -9,51 +9,25 @@
     <link rel="stylesheet" href="{% static 'base/css/recibo.css' %}">
     <style type="text/css">
         @page {
-             width: 58mm; 
+            width: 220mm; 
             size: auto;   
             margin: 0mm;
             }
     </style>
 </head>
-<body onload="window.print()" class="receipt">
-    <div class="col-md-1 col-sm-1 col-xs-1 col-xl-1">
-        <center>
-            <b class="text-center">Tienda</b><br> 
-            <small>Direccion</small><br>
-            <small>PEDIDO No. {{enc.pedido}}</small><br>
-        </center>
-        <small>
-            <br>
-            <b>Pedido No.:</b>&nbsp;&nbsp;{{enc.id}}&nbsp;&nbsp;
-            <b>Fecha Fact:</b>&nbsp;&nbsp;{{enc.fecha}}&nbsp;&nbsp; <br>
-            <b>Cliente:</b>&nbsp;&nbsp;{{enc.cliente.id}}&nbsp;&nbsp;- {{enc.cliente}}<br>
-            <br><br>
-        </small>
-        <table class="table table-condensed table-sm" width="60%">
-            <thead>
-                <th>Código</th>
-                <th  align='right'>Cant.</th>
-                <th  align='right'>P. Unit.</th>
-                <th  align='right'>Sub Total</th>
-                <th  align='right'>Descuento</th>
-                <th  align='right'>Total</th>
-            </thead>
-            <tbody>
-                {% for obj in detalle %}
-                <tr>
-                    <td>{{obj.producto.id}}</td>
-                    <td>{{obj.cantidad}}</td>
-                    <td>{{obj.precio}}</td>
-                    <td>{{obj.sub_total}}</td>
-                    <td>{{obj.descuento}}</td>
-                    <td>{{obj.total}}</td>
-                </tr>
-                <tr>
-                    <td colspan="5">{{obj.producto}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<body >
+
+        {% for item in enc %}
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.cliente }}</td>
+          <td>{{ item.fecha|date }}</td>
+          <td>{{ item.fecha_entrega }}</td>
+          <td>{{ item.repartidor }}</td>
+          <td>{{ item.total }}</td>
+        </tr>
+        <br>
+        {% endfor %}
         <div class="col-xs-1"></div>
         <div class="col-xs-11">
             <div class="pull-right">

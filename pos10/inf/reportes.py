@@ -16,19 +16,23 @@ def imprimir_prediccion(request,f1,f2):
     
     enc = PedidoEnc.objects.filter(fecha__gte=f1,fecha__lt=f2)
     
-    print(enc.cliente.id)
-
+  
     #print(datetime.utcnow())
     #datetime.utcnow().replace(tzinfo=timezone.utc)
     #print(datetime.utcnow())
     
     f2=f2 - timedelta(days=1)
+
     
-    context = {
+    contexto = {"enc":enc}
+    '''
+    {
         'request':request,
         'f1':f1,
         'f2':f2,
         'enc':enc
     }
+'''
+    #print(enc)
 
-    return render(request,template_name,context)
+    return render(request,template_name,contexto)

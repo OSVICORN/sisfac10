@@ -1,6 +1,9 @@
 from operator import mod
 from django.db import models
 
+#managers
+from .managers import PedidosManager
+
 #Para los signals
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
@@ -21,6 +24,8 @@ class PedidoEnc(ClaseModelo2):
     facturado = models.CharField(max_length=1, default='N')
     mail_repartidor = models.IntegerField(default=False)
     mail_cliente = models.IntegerField(default=False)
+
+    objects = PedidosManager()
 
     def __str__(self):
         return '{}'.format(self.id)
