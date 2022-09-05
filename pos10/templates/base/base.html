@@ -74,6 +74,10 @@
 
       {% url 'cmp:compras_list' as cmp_url %}
 
+      {% url 'tca:tesoreria_list' as tes_url %}
+
+      {% url 'inf:prediccion_seleccion' as inf_url %}
+
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
@@ -129,7 +133,7 @@
           <i class="fas fa-fw fa-truck"></i>
           <span>Movimientos</span>
         </a>
-        <div id="collapseCompras" class="collapse {% if cmp_url in request.path  %} show {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseCompras" class="collapse {% if cmp_url in request.path  %} show {% endif %}" aria-labelledby="headingCompras" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Entradas</h6>
             <a class="collapse-item {% if cmp_url in request.path  %} active {% endif %}" href="{% url 'cmp:compras_list' %}">Compras</a>
@@ -140,15 +144,14 @@
           </div>
         </div>
       </li>
-      {% comment %} <li class="nav-item {% if cat_url in request.path or s_cat_url in request.path  %} active {% endif %}"> {% endcomment %}
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+      <li class="nav-item {% if tes_url in request.path %} active {% endif %}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTesoreria" aria-expanded="true" aria-controls="collapseTesoreria">
           <i class="fas fa-fw fa-cog"></i>
           <span>Tesorería</span>
         </a>
-        <div id="collapseTwo" class="collapse {% if cat_url in request.path or s_cat_url in request.path %} show {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTesoreria" class="collapse {% if tes_url in request.path %} show {% endif %}" aria-labelledby="headingTesoreria" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Movimientos</h6>
+            <!-- <h6 class="collapse-header">Movimientos</h6> -->
             {% if perms.inv.view_categoria %}
             <a class="collapse-item {% if cat_url in request.path %}  {% endif %}" href="{{cat_url}}">Notas Débito</a>
             {% endif %}
@@ -161,12 +164,13 @@
           </div>
         </div>
       </li>
-      <li class="nav-item {% if cat_url in request.path or s_cat_url in request.path  %} active {% endif %}">
+
+      <li class="nav-item {% if inf_url in request.path %} active {% endif %}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInformes" aria-expanded="true" aria-controls="collapseInformes">
           <i class="fas fa-fw fa-cog"></i>
           <span>Informes</span>
         </a>
-        <div id="collapseInformes" class="collapse {% if cat_url in request.path or s_cat_url in request.path %} show {% endif %}" aria-labelledby="headingCartera" data-parent="#accordionSidebar">
+        <div id="collapseInformes" class="collapse {% if inf_url in request.path %} show {% endif %}" aria-labelledby="headingCartera" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Informes y Graficas</h6>
             {% if perms.inv.view_categoria %}

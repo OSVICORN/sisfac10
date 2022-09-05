@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-#from decouple import config
+from decouple import config
+
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'tca',
     'ped',
     'inf',
+    'ema',
     'django_userforeignkey',
     'rest_framework',
 ]
@@ -155,3 +157,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.googlemail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('USER_MAIL')
+EMAIL_HOST_PASSWORD = 'tmknefxtmldylzmz'
+#config('USER_MAIL_PASSWORD')
+EMAIL_USE_TLS = True

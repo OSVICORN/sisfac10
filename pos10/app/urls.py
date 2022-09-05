@@ -29,6 +29,7 @@ urlpatterns = [
     path('tca/', include(('tca.urls', 'tca'), namespace='tca')),
     path('inf/', include(('inf.urls', 'tca'), namespace='inf')),
     path('api/', include(('api.urls', 'api'), namespace='api')),
+    path('ema/', include(('ema.urls', 'ema'), namespace='ema')),
     
     path('admin/', admin.site.urls),
 ]
