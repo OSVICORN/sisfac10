@@ -159,10 +159,11 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'vitalfood.com.co'
-EMAIL_PORT = 465
-EMAIL_HOST_USERNAME = config('USER_MAIL')
-EMAIL_HOST_PASSWORD = '17^wu57Rm'
-#EMAIL_HOST_PASSWORD = 'tmknefxtmldylzmz'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USERNAME = 'eterniasas@gmail.com' #config('USER_MAIL')
+#EMAIL_HOST_PASSWORD = '17^wu57Rm'
+EMAIL_HOST_PASSWORD = 'Osval_001' #'mknefxtmldylzmz'
 #config('USER_MAIL_PASSWORD')
-#EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
