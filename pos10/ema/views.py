@@ -26,17 +26,18 @@ def crear_mail(email, subject, template_path, context):
 
 def enviar_bienvenida():
     mail_bienvenida = crear_mail(
-        '',
-        'Prueba del correo'
+        'osvicor@hotmail.com',
+        'Prueba del correo',
         'ema/bienvenida.html',
         {
             'username': 'osvaldo'
         }
     )
 
-    enviar_bienvenida(fail_silently=False)
+    mail_bienvenida.send(fail_silently=False)
 
 def enviar_correo(request):
     enviar_bienvenida()
+    print("correo enviado")
 
     return redirect('ped:pedido_list')
