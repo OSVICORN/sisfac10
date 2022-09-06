@@ -160,10 +160,9 @@ DATABASES['default'].update(db_from_env)
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USERNAME = 'eterniasas@gmail.com' #config('USER_MAIL')
-#EMAIL_HOST_PASSWORD = '17^wu57Rm'
-EMAIL_HOST_PASSWORD = 'Osval_001' #'mknefxtmldylzmz'
+EMAIL_HOST_USERNAME = 'oswaldovillaloboscortina@gmail.com' #config('USER_MAIL')
+EMAIL_HOST_PASSWORD = 'Osval_1964'
+#EMAIL_HOST_PASSWORD = 'Osval_1964' #'mknefxtmldylzmz'
 #config('USER_MAIL_PASSWORD')
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True

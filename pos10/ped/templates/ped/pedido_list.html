@@ -73,7 +73,7 @@
           <a href="{% url 'ped:pedido_edit' item.id %}" data-toggle="tooltip" data-placement="top" title="Editar" class="href btn btn-warning btn-circle">
               <i class="far fa-edit"></i>
           </a>
-          <a href="{% url 'ema:enviar_correo' %}" data-toggle="tooltip" data-placement="top" title="Mail_Repartidor" class="href btn btn-warning btn-circle">
+          <a href="{% url 'ema:enviar_correo' item.cliente.correo %}" data-toggle="tooltip" data-placement="top" title="Mail_Repartidor" class="href btn btn-warning btn-circle">
             <i class="fas fa-envelope"></i>
           </a>
         </td>

@@ -10,18 +10,17 @@ from django.template.loader import get_template
 
 def crear_mail(email, subject, template_path, context):
     template = get_template(template_path)
+    email = 'osvicor@hotmail.com'
     content = template.render(context)
 
     mail = EmailMultiAlternatives(
-        subject = subject,
-        body = '',
+        'subject = subject',
+        'asdasdASDAS',
         from_email = settings.EMAIL_HOST_USERNAME,
-        to = [
-            email
-        ],
-        cc = []
+        to=[email]
     )
-    mail.attach_alternative(content, 'text/mail')
+    print(mail)
+    mail.attach_alternative(content, 'text/html')
     return mail
 
 def enviar_bienvenida():
