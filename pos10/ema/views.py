@@ -16,7 +16,7 @@ def crear_mail(id):
     dato = PedidoEnc.objects.filter(id=id)
     print(dato)
     email = 'osvicor@hotmail.com'
-    content = template.render(context)
+    #content = template.render(context)
 
     mail = EmailMultiAlternatives(
         'subject = subject',
