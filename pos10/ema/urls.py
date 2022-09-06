@@ -12,7 +12,6 @@ urlpatterns = [
     #path('barrios/new',BarrioNew.as_view(), name="barrio_new"),
     #path('barrios/<int:pk>',BarrioEdit.as_view(), name="barrio_edit"),
     path('enviar/correo',enviar_correo, name="enviar_correo"),
-    
     #path('informes/prediccion-seleccion',imprimir_prediccion, name="informe_prediccion_todos"),
     #path('informes/prediccion-todas/<str:f1>/<str:f2>',imprimir_prediccion, name="informe_prediccion_todos"),
 ]
