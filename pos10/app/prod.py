@@ -94,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sifa10',
         'HOST': 'localhost',
-        'USER': 'postgres',
+        'USER': 'osvicor',
         'PASSWORD': 'Oscor_1964',
         'PORT': 5432
     }
