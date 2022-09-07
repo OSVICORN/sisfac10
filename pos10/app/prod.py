@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-#from decouple import config
+from decouple import config
+
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,11 +27,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #SECRET_KEY=config("SECRET_KEY")
 SECRET_KEY = 'django-insecure-$8c9od2wz==s=w0qgz^d$^r^-zz4dr8#tsil=a1)&3_72+!9mb'
 
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 #ALLOWED_HOSTS = ["127.0.0.1",".herokuapp.com"]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -49,6 +52,7 @@ INSTALLED_APPS = [
     'tca',
     'ped',
     'inf',
+    'ema',
     'django_userforeignkey',
     'rest_framework',
 ]
@@ -94,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sifa10',
         'HOST': 'localhost',
-        'USER': 'postgres',
+        'USER': 'osvicor',
         'PASSWORD': 'Oscor_1964',
         'PORT': 5432
     }
@@ -153,3 +157,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'vitalfood.com.co'
+EMAIL_HOST_USER = 'ventas@vitalfood.com.co'
+EMAIL_HOST_PASSWORD = '27e0?lc4U'
+EMAIL_PORT = 465
+
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'vitalfood.com.co'
+#EMAIL_USE_TLS = True
+#EMAIL_HOST_USERNAME = 'oswaldovillaloboscortina@gmail.com' #config('USER_MAIL')
+#EMAIL_HOST_PASSWORD = 'Osval_1964'
+#EMAIL_HOST_PASSWORD = 'Osval_1964' #'mknefxtmldylzmz'
+#config('USER_MAIL_PASSWORD')
