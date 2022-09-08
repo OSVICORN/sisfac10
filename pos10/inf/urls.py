@@ -12,5 +12,5 @@ urlpatterns = [
     #path('barrios/estado/<int:id>',barrioInactivar, name="barrio_inactivar"),
     
     path('informes/prediccion-seleccion',imprimir_prediccion, name="informe_prediccion_todos"),
-    path('informes/prediccion-todas/<str:f1>/<str:f2>',imprimir_prediccion, name="informe_prediccion_todos"),
+    path('informes/prediccion-todas/<str:f1>/<str:f2>/<str:segmento>',imprimir_prediccion, name="informe_prediccion_todos"),
 ]

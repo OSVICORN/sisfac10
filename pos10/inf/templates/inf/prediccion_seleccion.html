@@ -8,17 +8,30 @@
   </div>
   <!-- Card Body -->
   <div class="card-body">
-    <div class="row">
+    <div class="row mb-4">
       <div class="col-md-4">
         <input type="text" class="form-class" name="f1" id="f1" readonly>
       </div>
       <div class="col-md-4">
         <input type="text" class="form-class" name="f2" id="f2" readonly>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-4" >
+        <select class="form-class" name="segmento" id="segmento">
+          <option selected>Seleccione Tipo de CLiente</option>
+          <option value="Corporativo-Empresarial-Mayorista">Corporativo/Empresarial/Mayorista</option>
+          <option value="Natural-Detail-Minorista">Natural/Detail/Minorista</option>
+          <option value="Institucional-Público-Fundaciones">Institucional/Público/Fundaciones</option>
+          <option value="Tienda-Minimercado-Negocio">Tienda/Minimercado/Negocio</option>
+        </select>
+      </div>  
+    </div>
+    <div class="row">
       <div class="col-md-4">
         <button class="btn btn-warning" type="button" id="btnPrint">Imprimir</button>
       </div>
-    </div>
+  </div>
   </div>
 </div>
 {% endblock %}
@@ -32,9 +45,11 @@ $(function(){
 
   $("#btnPrint").click(function(e){
     e.preventDefault();
-    var f1,f2;
+    var f1,f2, segmento;
     f1 = $("#f1").val();
     f2 = $("#f2").val();
+    segmento = $("#segmento").val();
+
     if(f1=="" || f1==null){
       f1="2019-06-01";
     }
@@ -43,7 +58,7 @@ $(function(){
       var f2 = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
     }
     
-    var url = "prediccion-todas/" + f1 + "/" + f2;
+    var url = "prediccion-todas/" + f1 + "/" + f2 + "/" + segmento;
 
     window.open(url,'prediccion');
     

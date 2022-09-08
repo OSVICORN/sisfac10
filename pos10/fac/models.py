@@ -105,15 +105,15 @@ class Cliente(ClaseModelo):
         (FEM,'Femenino'),
         (OTR,'Otro')
     ]
-    EMP = 'Corporativo/Empresarial/Mayorista'
-    NAT = 'Natural/Detail/Minorista'
-    INS = 'Institucional/Público/Fundaciones'
-    TEN = 'Tienda/Minimercado/Negocio'
+    EMP = 'Corporativo-Empresarial-Mayorista'
+    NAT = 'Natural-Detail-Minorista'
+    INS = 'Institucional-Público-Fundaciones'
+    TEN = 'Tienda-Minimercado-Negocio'
     SEGMENTO_CLIENTE = [
-        (EMP,'Corporativo/Empresarial/Mayorista'),
-        (NAT,'Natural/Detail/Minorista'),
-        (INS,'Institucional/Público/Fundaciones'),
-        (TEN,'Tienda/Minimercado/Negocio')
+        (EMP,'Corporativo-Empresarial-Mayorista'),
+        (NAT,'Natural-Detail-Minorista'),
+        (INS,'Institucional-Público-Fundaciones'),
+        (TEN,'Tienda-Minimercado-Negocio')
     ]
     tipo=models.CharField(
         max_length=10,
