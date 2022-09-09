@@ -6,11 +6,9 @@
     <div class="card-header">
       <div class="row"> 
         <div class="col-lg-2">Listado de Categorías </div>
-        <div class="col-lg-3" data-toggle="tooltip" data-placement="top" title="Agregar Categoría">
-          <a href="{% url 'inv:categoria_new' %}">
-            <i class="fas fa-folder-plus"></i>
-          </a>
-        </div>
+
+        <a href="{% url 'inv:categoria_new' %}" class="btn btn-g text-primary"><i class='fa fa-cart-plus' style='color: blue'></i> Agregar</a>
+
       </div>
     </div>
     <!-- Card Body -->

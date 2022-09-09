@@ -63,8 +63,8 @@
         <tr>
           <td>{{ item.id }}</td>
           <td>{{ item.cliente }}</td>
-          <td>{{ item.fecha|date }}</td>
-          <td>{{ item.fecha_entrega }}</td>
+          <td>{{ item.fecha|date:'Y-m-d' }}</td>
+          <td>{{ item.fecha_entrega|date:'Y-m-d' }}</td>
           <td>{{ item.repartidor }}</td>
           <td>{{ item.total }}</td>
           <td>{{item.estado|yesno:"Activo,Inactivo"}}</td>
