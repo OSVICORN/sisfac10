@@ -1,3 +1,5 @@
+from cProfile import label
+from cgitb import text
 from django.db import models
 
 #Para los signals
@@ -142,7 +144,7 @@ class Cliente(ClaseModelo):
     razonsocial = models.CharField(max_length=120, blank=True)
     actividad = models.CharField(max_length=20, blank=True) 
     replegal = models.CharField(max_length=60, blank=True)
-    contacto = models.CharField(max_length=60, blank=True)
+    contacto = models.CharField(help_text="Contacto", max_length=60, blank=True)
     celcontacto = models.CharField(max_length=10, blank=True)
     correocontacto = models.EmailField(max_length=250, blank=True)
     telfijo = models.CharField(max_length=10, blank=True)

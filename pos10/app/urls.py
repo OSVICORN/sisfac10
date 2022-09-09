@@ -30,6 +30,7 @@ urlpatterns = [
     path('inf/', include(('inf.urls', 'tca'), namespace='inf')),
     path('api/', include(('api.urls', 'api'), namespace='api')),
     path('ema/', include(('ema.urls', 'ema'), namespace='ema')),
+    path('dte/', include(('dte.urls', 'dte'), namespace='dte')),
     
     path('admin/', admin.site.urls),
 ]

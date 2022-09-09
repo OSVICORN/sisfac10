@@ -57,3 +57,4 @@ class ClienteForm(forms.ModelForm):
         self.fields['documento'].empty_label =  "No. de Documento"
         self.fields['barrio'].empty_label =  "Seleccione Barrio"
         self.fields['ruta'].empty_label =  "Seleccione Ruta"
+        self.fields['replegal'].empty_label =  "Representante Legal"

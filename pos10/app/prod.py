@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'ped',
     'inf',
     'ema',
+    'dte',
     'django_userforeignkey',
     'rest_framework',
 ]

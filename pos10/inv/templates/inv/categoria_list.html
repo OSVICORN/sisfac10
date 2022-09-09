@@ -44,8 +44,8 @@
                   <td>{{ item.fc|date:"d/m/Y H:i:s" }}</td>
                   <td>{{ item.fm|date:"d/m/Y H:i:s" }}</td>
                   <td>
-                    <a href="{% url 'inv:categoria_edit' item.id %}" data-toggle="tooltip" data-placement="top" title="Editar" ><i class="fas fa-edit"></i></a> 
-                    <a href="{% url 'inv:categoria_del' item.id %}"  data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                    <a href="{% url 'inv:categoria_edit' item.id %}" class="btn btn-g text-warning" data-toggle="tooltip" data-placement="top" title="Editar" ><i class="fas fa-edit"></i></a> 
+                    <a href="{% url 'inv:categoria_del' item.id %}"  class="btn btn-g text-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
                   </td>
               </tr>
               {% endfor %}

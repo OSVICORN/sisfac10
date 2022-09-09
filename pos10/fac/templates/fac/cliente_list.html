@@ -9,11 +9,11 @@
       <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
       </a>
-      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+{% comment %}       <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
         <div class="dropdown-header">Acciones:</div>
         <a class="dropdown-item" onclick="return abrir_modal('{% url 'fac:cliente_new' %}')" href="#"><i class="far fa-calendar-plus"></i> Nuevo</a>
       </div>
-    </div>
+ {% endcomment %}    </div>
   </div>
   <!-- Card Body -->
   <div class="card-body">
@@ -21,7 +21,12 @@
     <div class="alert alert-info">No Hay Clientes</div>
     {% endif %}
     <div class="buttons-toolbar">
-        <a class="dropdown-item" onclick="return abrir_modal('{% url 'fac:cliente_new' %}')" href="#"><i class="far fa-calendar-plus"></i> Nuevo</a>
+      <a href="{% url 'fac:cliente_new' %}" class="btn btn-g text-primary">
+ 
+ 
+        <i class="fas fa-user-plus"></i> Nuevo</a>
+
+        {% comment %} <a class="dropdown-item" onclick="return abrir_modal('{% url 'fac:cliente_new' %}')" href="#"><i class="far fa-calendar-plus"></i> Nuevo</a> {% endcomment %}
     </div>
 
     <table 
@@ -62,7 +67,8 @@
             </div>
           </td>
           <td>
-            <button class="btn btn-warning btn-circle" onclick="return abrir_modal('{% url 'fac:cliente_edit' item.id %}')"><i class="far fa-edit"></i></button>
+            {% comment %} <button class="btn btn-warning btn-circle" onclick="return abrir_modal('{% url 'fac:cliente_edit' item.id %}')"><i class="far fa-edit"></i></button> {% endcomment %}
+            <a href="{% url 'fac:cliente_edit' item.id %}" class="btn btn-g text-warning" data-toggle="tooltip" data-placement="top" title="Editar" ><i class="fas fa-edit"></i></a>             
           </td>
         </tr>
         {% endfor %}
