@@ -21,7 +21,7 @@ class PedidoEnc(ClaseModelo2):
     sub_total=models.FloatField(default=0)
     descuento=models.FloatField(default=0)
     total=models.FloatField(default=0)
-    facturado = models.CharField(max_length=1, default='N')
+    facturado = models.CharField(max_length=1, default='P')
     mail_repartidor = models.IntegerField(default=False)
     mail_cliente = models.IntegerField(default=False)
 
@@ -32,6 +32,7 @@ class PedidoEnc(ClaseModelo2):
 
     def save(self):
         self.total = self.sub_total - self.descuento
+        self.facturado = 'P'
         super(PedidoEnc,self).save()
 
     class Meta:

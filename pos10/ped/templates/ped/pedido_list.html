@@ -67,7 +67,7 @@
           <td>{{ item.fecha_entrega|date:'Y-m-d' }}</td>
           <td>{{ item.repartidor }}</td>
           <td>{{ item.total }}</td>
-          <td>{{item.estado|yesno:"Activo,Inactivo"}}</td>
+          <td>{{item.facturado}}</td>
           <td>
             <a href="{% url 'ped:pedido_edit' item.id %}" data-toggle="tooltip" data-placement="top" title="Editar" class="href btn btn-warning btn-circle">
                 <i class="far fa-edit"></i>
@@ -75,7 +75,7 @@
             <a href="{% url 'ema:enviar_correo' %}" data-toggle="tooltip" data-placement="top" title="Mail_Repartidor" class="href btn btn-info btn-circle">
               <i class="fas fa-envelope"></i>
             </a>
-            <a href="{#% url 'ema:enviar_correo' %#}" data-toggle="tooltip" data-placement="top" title="Facturar" class="href btn btn-secondary btn-circle">
+            <a href="{#% url 'ema:enviar_correo' %#}" data-toggle="tooltip" data-placement="top" title="Facturar" onclick="inactivar({{item.id}})" class="href btn btn-secondary btn-circle">
               <i class="far fa-check-circle"></i>
           </td>
         </tr>
@@ -112,5 +112,39 @@ $(function(){
     
   });
 });
+
+function inactivar(id)
+  {
+    var data = {id:id};
+    data = JSON.stringify(data);
+    var token = '{{csrf_token}}';
+    // alert(token);
+    // alert(id);
+    
+    $.ajax({
+      headers : {"X-CSRFToken": token},
+      type:"POST",
+      url:"/ped/pedidos/estado/" +id,
+      data: data,
+      success: function(response){
+        if(response==="OK")
+        {
+          location.reload(true);
+        }
+        else{
+          mensaje("Error Intentado Facturar");
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrow){
+        console.log(textStatus, errorThrow);
+        mensaje(errorThrow,'red');
+        cerrar_modal();
+      }
+    });
+  }
+// Call the dataTables jQuery plugin
+// $(document).ready(function() {
+//   $('.table').DataTable();
+// });
 </script>
 {% endblock %}

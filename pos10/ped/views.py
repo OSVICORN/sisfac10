@@ -38,7 +38,8 @@ class VistaBaseEdit(SuccessMessageMixin,SinPrivilegios, \
 class PedidoView(SinPrivilegios, generic.ListView):
     model = PedidoEnc
     template_name = "ped/pedido_list.html"
-    context_object_name = "obj"
+    queryset = PedidoEnc.objects.filter(facturado='P')
+    context_object_name = 'obj'
     permission_required="ped.view_pedidoenc"
 
     def get_queryset(self):
@@ -148,6 +149,32 @@ def pedidos(request,id=None):
 
     return render(request,template_name,contexto)
 
+class PedidoEdit(VistaBaseEdit):
+    model=PedidoEnc
+    template_name="ped/pedido_list.html"
+    form_class=PedidoEnc
+    success_url= reverse_lazy("ped:pedido_list")
+    permission_required="fac.change_pedidoenc"
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        context = self.get_context_data(object=self.object, form=form,t=t)
+        return self.render_to_response(context)
+
+@login_required(login_url="/login/")
+@permission_required("ped.change_pedidoenc",login_url="/login/")
+def pedidoFacturar(self, request, id):
+    pedido = PedidoEnc.objects.filter(pk=id).first()
+    if request.method=="POST":
+        if pedido:
+            pedido.facturado = 'F'
+            PedidoEnc.save(request)
+            return HttpResponse("OK")
+        return HttpResponse("FAIL")
+    
+    return HttpResponse("FAIL")
 
 class ProductoView(inv.ProductoView):
     template_name="ped/buscar_producto.html" 
