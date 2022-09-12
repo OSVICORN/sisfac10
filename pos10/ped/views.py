@@ -68,10 +68,10 @@ class PedidoEdit(SuccessMessageMixin,SinPrivilegios, generic.UpdateView):
     success_message="Pedido Actualizado Satisfactoriamente"
     permission_required="inv.change_pedidoenc"
 
-    def form_valid(self, form):
+"""     def form_valid(self):
         form.instance.um = self.request.user.id
         return super().form_valid(form)
-
+ """
 @login_required(login_url='/login/')
 @permission_required('ped.change_pedidoenc', login_url='bases:sin_privilegios')
 def pedidos(request,id=None):
@@ -164,8 +164,9 @@ def pedidos(request,id=None):
 
 @login_required(login_url="/login/")
 @permission_required("ped.change_pedidoenc",login_url="/login/")
-def pedidoFacturar(self, request, id):
+def pedidoFacturar(request, id):
     pedido = PedidoEnc.objects.filter(pk=id).first()
+    print(pedido.facturado)
     if request.method=="POST":
         if pedido:
             pedido.facturado = 'F'

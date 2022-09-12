@@ -241,6 +241,7 @@ def clienteInactivar(request,id):
     if request.method=="POST":
         if cliente:
             cliente.estado = not cliente.estado
+            print(request.path)
             cliente.save()
             return HttpResponse("OK")
         return HttpResponse("FAIL")

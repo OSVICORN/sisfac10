@@ -32,7 +32,6 @@ class PedidoEnc(ClaseModelo2):
 
     def save(self):
         self.total = self.sub_total - self.descuento
-        self.facturado = 'P'
         super(PedidoEnc,self).save()
 
     class Meta:

@@ -46,6 +46,6 @@ def enviar_correo(self):
     mensaje='Prueba'
     remitente='ventas@vitalfood.com.co'
     
-    send_mail(asunto, mensaje, remitente, ['osvicor@hotmail.com'])
+    send_mail(asunto, mensaje, remitente, ['osvicor@hotmail.com'], fail_silently=False,)
 
     return redirect('ped:pedido_list')
