@@ -149,20 +149,6 @@ def pedidos(request,id=None):
 
     return render(request,template_name,contexto)
 
-class PedidoEdit(VistaBaseEdit):
-    model=PedidoEnc
-    template_name="ped/pedido_list.html"
-    form_class=PedidoEnc
-    success_url= reverse_lazy("ped:pedido_list")
-    permission_required="fac.change_pedidoenc"
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        context = self.get_context_data(object=self.object, form=form,t=t)
-        return self.render_to_response(context)
-
 @login_required(login_url="/login/")
 @permission_required("ped.change_pedidoenc",login_url="/login/")
 def pedidoFacturar(self, request, id):
