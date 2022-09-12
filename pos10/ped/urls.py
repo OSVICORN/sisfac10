@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .views import PedidoView, pedidos, PedidoDetDelete,\
+from .views import PedidoView, pedidos, PedidoDetDelete, pedidoFacturar, \
     ProductoView
     
     #, \
@@ -13,6 +13,7 @@ urlpatterns = [
     path('pedidos/new',pedidos, name="pedido_new"),
     path('pedidos/edit/<int:id>',pedidos, name="pedido_edit"),
     path('pedidos/<int:pedido_id>/delete/<int:pk>',PedidoDetDelete.as_view(), name="pedidos_del"),
+    path('pedidos/estado/<int:id>',pedidoFacturar, name="pedido_facturar"),
     
     path('pedidos/buscar-producto',ProductoView.as_view(), name="pedido_producto"),
 
