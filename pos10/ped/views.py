@@ -59,6 +59,19 @@ class PedidoView(SinPrivilegios, generic.ListView):
 
         return qs
 
+class PedidoEdit(SuccessMessageMixin,SinPrivilegios, generic.UpdateView):
+    model=PedidoEnc
+    template_name="ped/pedidos.html"
+    context_object_name = "obj"
+    form_class=PedidoEnc
+    success_url=reverse_lazy("ped:pedido_list")
+    success_message="Pedido Actualizado Satisfactoriamente"
+    permission_required="inv.change_pedidoenc"
+
+    def form_valid(self, form):
+        form.instance.um = self.request.user.id
+        return super().form_valid(form)
+
 @login_required(login_url='/login/')
 @permission_required('ped.change_pedidoenc', login_url='bases:sin_privilegios')
 def pedidos(request,id=None):
@@ -156,7 +169,7 @@ def pedidoFacturar(self, request, id):
     if request.method=="POST":
         if pedido:
             pedido.facturado = 'F'
-            PedidoEnc.save(request)
+            pedido.save()
             return HttpResponse("OK")
         return HttpResponse("FAIL")
     
