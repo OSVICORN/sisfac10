@@ -159,17 +159,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'vitalfood.com.co'
-EMAIL_HOST_USER = 'ventas@vitalfood.com.co'
-EMAIL_HOST_PASSWORD = '27e0?lc4U'
-EMAIL_PORT = 465
-
-
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_SSL = False
 #EMAIL_HOST = 'vitalfood.com.co'
-#EMAIL_USE_TLS = True
-#EMAIL_HOST_USERNAME = 'oswaldovillaloboscortina@gmail.com' #config('USER_MAIL')
-#EMAIL_HOST_PASSWORD = 'Osval_1964'
-#EMAIL_HOST_PASSWORD = 'Osval_1964' #'mknefxtmldylzmz'
-#config('USER_MAIL_PASSWORD')
+EMAIL_HOST = 'smtp.office365.com'
+#EMAIL_HOST_USER = 'fundaescolstm@gmail.com'
+#EMAIL_HOST_USER = 'ventas@vitalfood.com.co'
+EMAIL_HOST_USER = 'vitalfoodstm@hotmail.com'
+#EMAIL_HOST_PASSWORD = '0Ean*l596'
+EMAIL_HOST_PASSWORD = 'Inda_1985'
+EMAIL_PORT = 587 #465 #587
