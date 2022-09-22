@@ -168,8 +168,8 @@
                                 <td>{{ item.producto }}</td>
                                 <td>{{ item.producto.descripcion }}</td>
                                 <td>{{ item.cantidad }}</td>
-                                <td>{{ item.sub_total }}</td>
-                                <td>{{ item.descuento }}</td>
+                                <td>{{ item.sub_total|floatformat:2 }}</td>
+                                <td>{{ item.descuento|floatformat:2 }}</td>
                                 <td>{{ item.total }}</td>
                                 <td>
                                     <button class="btn btn-danger btn-circle" onclick="return abrir_modal('{% url 'ped:pedidos_del' enc.id item.id %}')"><i class="fas fa-trash-alt"></i></button>

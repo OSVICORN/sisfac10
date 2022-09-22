@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.humanize',
     'django.contrib.staticfiles',
     'bases',
     'inv',
@@ -135,6 +136,8 @@ TIME_ZONE = 'America/Bogota'
 USE_I18N = True
 
 USE_L10N = True
+
+USE_THOUSAND_SEPARATOR = True
 
 #USE_TZ = True
 
